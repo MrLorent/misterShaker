@@ -4,139 +4,105 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./css/style.css">
-	<title>Accueil-MisterShaker</title>
+	<title>Accueil - MisterShaker</title>
 </head>
 <body>
 	<header>
-		<!-- <nav>
-		</nav> -->
-	</header>
-	<main>
-		<!--<div class="barman-wait">
-			<img class="barman-wait"
-                    src= "img.barman-wait.png"
-					alt= "logo of barman waiting">
+		<img class="logo"
+			src= "./img/logo.png"
+			alt= "logo of mistershaker">
+		<form action="#">
+			<input type="text" placeholder="Search by cocktail name">
+			<button type="submit">More Filters</button>
+			<button type="submit">Search</button>
+		</form>
+		<!-- <div id="filters">
+			<form action="#2">
+				<label for="name">Main alcohol :</label>
+				<select name="main alcohol" id="alcohol-selecter">
+					<option value="rhum">Rhum</option>
+					<option value="whisky">Whisky</option>
+					<option value="vodka">Vodka</option>
+				</select>
+				<label for="name">Cocktail category :</label>
+				<select name="category" id="category-selecter">
+					<option value="strong">Strong</option>
+					<option value="light">Light</option>
+				</select>
+			</form>
 		</div> -->
-			
-		<section id="search">
-			<div id="main-search">
-				<form action="#">
-				<img class="logo"
-                    src= "./img/logo.png"
-                    alt= "logo of mistershaker">
-				<input type="text" placeholder="Search by cocktail name">
-				<button type="submit">More Filters</button>
-				<button type="submit">Search</button>
-				</form>
+	</header>
+	<!-- <nav>
+	</nav> -->
+	<main>
+		<section id="cocktailList">
+			<div class="cocktail">
+				<img class="picture"
+					src= "./img/cocktail.jpeg"
+					alt= "picture of cocktail">
+				<div class="cocktail-resume">
+					<h2 class="cocktail-title">Cuba Libre</h2>
+					<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
+				</div>
 			</div>
-
-			<div id="filters">
-				<form action="#2">
-					<label for="name">Main alcohol :</label>
-					<select name="main alcohol" id="alcohol-selecter">
-						<option value="rhum">Rhum</option>
-						<option value="whisky">Whisky</option>
-						<option value="vodka">Vodka</option>
-					</select>
-					<label for="name">Cocktail category :</label>
-					<select name="category" id="category-selecter">
-						<option value="strong">Strong</option>
-						<option value="light">Light</option>
-					</select>
-				</form>
+			<div class="cocktail">
+				<img class="picture"
+					src= "./img/cocktail.jpeg"
+					alt= "picture of cocktail">
+				<div class="cocktail-resume">
+					<h2 class="cocktail-title">Cuba Libre</h2>
+					<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
+				</div>
+			</div>
+			<div class="cocktail">
+				<img class="picture"
+					src= "./img/cocktail.jpeg"
+					alt= "picture of cocktail">
+				<div class="cocktail-resume">
+					<h2 class="cocktail-title">Cuba Libre</h2>
+					<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
+				</div>
+			</div>
+			<div class="cocktail">
+				<img class="picture"
+					src= "./img/cocktail.jpeg"
+					alt= "picture of cocktail">
+				<div class="cocktail-resume">
+					<h2 class="cocktail-title">Cuba Libre</h2>
+					<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
+				</div>
 			</div>
 		</section>
 
-		<section id="page">
-
-			<div class="barman-look">
-				<img class="barman-look"
-				src= "./img/barman-look.png"
-				alt= "logo of barman looking">
+		<section id="cocktail">
+			<div class="cocktail-top">
+				<button class="return">
+					<img src="./img/arrow.png" alt="picture of arrow">
+					Return
+				</button>
+				<h2>Cuba Libre</h2>
 			</div>
 
-			<div class="list">
-				<div class="cocktail">
-					<img class="picture"
-                    	src= "./img/cocktail.jpeg"
-                    	alt= "picture of cocktail">
-					<div  class="cocktail-resume">
-						<h2 class="cocktail-title">Cuba Libre</h2>
-						<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
-					</div>
+			<div class="cocktail-bottom">
+				<img class="picture"
+					src= "./img/cocktail.jpeg"
+					alt= "picture of cocktail">
+				<div class="cocktail-info">
+					<p>Category</p>
+					<ul class="ingredients">
+						<a>Ingredients</a>
+						<li class="history">history</li>
+						<li class="composition">composition</li>
+						<li class="temperature">temperature	</li>
+					</ul>
 				</div>
-				<div class="cocktail">
-					<img class="picture"
-						src= "./img/cocktail.jpeg"
-						alt= "picture of cocktail">
-					<div class="cocktail-resume">
-						<h2 class="cocktail-title">Cuba Libre</h2>
-						<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
-					</div>
-				</div>
-				<div class="cocktail">
-					<img class="picture"
-                	    src= "./img/cocktail.jpeg"
-                	    alt= "picture of cocktail">
-					<div class="cocktail-resume">
-						<h2 class="cocktail-title">Cuba Libre</h2>
-						<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
-					</div>
-				</div>
-				<div class="cocktail">
-					<img class="picture"
-                	    src= "./img/cocktail.jpeg"
-                	    alt= "picture of cocktail">
-					<div class="cocktail-resume">
-						<h2 class="cocktail-title">Cuba Libre</h2>
-						<p>Ingrédient 1, ingrédient 2, ingrédient 3,...</p>
-					</div>
-				</div>
+
 			</div>
-
-			<section id="cocktail">
-
-				<div class="cocktail-top">
-					<button class="return">
-						<img src="./img/arrow.png" alt="picture of arrow">
-						Return
-					</button>
-					<h2>Cuba Libre</h2>
-				</div>
-
-				<div class="cocktail-bottom">
-					<img class="picture"
-						src= "./img/cocktail.jpeg"
-						alt= "picture of cocktail">
-					<div class="cocktail-info">
-						<p>Category</p>
-						<ul class="ingredients">
-							<a>Ingredients</a>
-							<li class="history">history</li>
-							<li class="composition">composition</li>
-							<li class="temperature">temperature	</li>
-						</ul>
-					</div>
-
-				</div>
-
-				<div class="barman-glass">
-					<img class="barman-glass"
-					src= "./img/barman-glass.png"
-					alt= "picture of barman with glass">
-				</div>
-			
-			</section> 
-
-			
-
 		</section>
-
 		
-
 	</main>
 	<footer>
-		<p>©MISTERSHAKER by Flavien Lineuc & Tanguy LORENT - 2020 - All rights reserved.</p>
+		<span>©MISTERSHAKER by Flavien Lineuc & Tanguy LORENT - 2020 - All rights reserved.</span>
 	</footer>
 	<script rel="text/javascript" src="./js/main.js"></script>
 </body>
