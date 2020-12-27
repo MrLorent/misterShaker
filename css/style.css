@@ -35,8 +35,6 @@ select {
 }
 
 /* ----------------- HEADER ----------------- */
-/*id=# et class=.*/
-
 header {
     background: #202020;
     width: 100%;
@@ -50,12 +48,16 @@ header {
     z-index: 1;
 }
 
+.research-button {
+    display: none;
+}
+
 form {
     background: linear-gradient(to top, #ff1ba8d5, 50%, #2da6ef);
     height: 60%;
-    flex-grow: 1;
     border-radius: calc(14vh * 0.6);
     display: flex;
+    flex-grow: 1;
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
@@ -263,7 +265,7 @@ form button::before {
     padding: 15px 15px 15px 20px;
 }
 
-/* -------------- SECTION COCKTAILLIST -------------- */
+/* -------------------- FOOTER -------------------- */
 footer {
     height: 7.5vh;
     width: 100%;
@@ -276,6 +278,130 @@ footer {
 
 footer span {
     font-size: 0.8em;
+    text-align: center;
     opacity: 0.5;
 }
 
+
+
+/*------------------- RESPONSIVE --------------------*/
+@media (max-width: 768px){
+    /*------------------- GÉNÉRAL ------------------*/
+
+    /*------------------- HEADER ------------------*/
+    header {
+        justify-content: space-between;
+    }
+
+    .research-button {
+        height: 30px;
+        display: flex;
+        margin: auto 15px;
+    }
+
+    form {
+        background: #181818;
+        border-radius: 0;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        flex-grow: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: absolute;
+        top: 14vh;
+        left: 0;
+        padding: 0 25px;
+        margin: 0;
+        transition: 0.5s ease-out;
+    }
+
+    .research-button.clicked ~ form {
+        height: 86vh;
+        padding: 50px 25px;
+    }
+
+    form * {
+        height: auto;
+    }
+
+    form label {
+        margin: 0 0 5% 0;
+    }
+
+    form select {
+        background: url(./img/down_arrow.png) no-repeat center right 10px, #202020;
+        background-size: 7.5%;
+    }
+
+    form select,
+    form .search-bar {
+        width: 100%;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 15px;
+        margin: 0 0 15% 0;
+    }
+
+    form .search-bar {
+        background: #202020;
+        flex-grow: 0;
+        border: 2px solid #323232;
+    }
+
+    form button {
+        background: linear-gradient(to top, #ff1ba8d5, 50%, #2da6ef);
+        border-radius: 5vh;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        padding: 0;
+        margin: auto 25px 0 25px;
+    }
+
+    form button::before {
+        display: none;
+    }
+
+
+    /*------------ SECTION COCKTAILLIST -----------*/
+    #cocktailList {
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 0 0 0;
+        margin: 14vh 0 0 0;
+    }
+
+    #cocktailList::after {
+        display: none;
+    }
+
+    .cocktail {
+        width: 225px;
+        height: 225px;
+        margin: 0 0 25px 0;
+    }
+
+    .cocktail-resume {
+        transform: translateY(0);
+    }
+
+    /* -------------- SECTION COCKTAIL -------------- */
+    #cocktail {
+        display: none;
+    }
+
+    #cocktail::after {
+        display: none;
+    }
+
+    /*------------------- FOOTER ------------------*/
+    footer {
+        height: 10vh;
+        position: static;
+    }
+
+}
