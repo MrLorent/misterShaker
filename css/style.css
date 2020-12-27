@@ -2,12 +2,12 @@
 html {
 	width: 100%;
     height: 100%;
+    color: #e7e7e7;
+	font-family: 'Roboto';
     line-height: 1.15;
 }
 
 body {
-	color: #E7E7E7;
-	font-family: 'Roboto';
     background-color: #181818;
 	width: 100%;
     height: 100%;
@@ -40,29 +40,33 @@ select {
 header {
     background: #202020;
     width: 100%;
-    height: 100px;
+    height: 14vh;
     display: flex;
-    justify-content: space-around;
     align-items: center;
     position: fixed;
+    top: 0;
     box-sizing: border-box;
-    padding: 1% 1.5%;
+    padding: 1%;
     z-index: 1;
 }
 
 form {
     background: linear-gradient(to top, #ff1ba8d5, 50%, #2da6ef);
-    width: 80%;
     height: 60%;
-    border-radius: calc(100px * 0.6);
+    flex-grow: 1;
+    border-radius: calc(14vh * 0.6);
     display: flex;
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
+    margin: 0 2.5% 0 5%;
 }
 
 form * {
     height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 form label {
@@ -72,55 +76,58 @@ form label {
 }
 
 form select {
-    background: none;
+    cursor: pointer;
     color: #e7e7e7;
     font-family: 'Roboto';
     font-size: 1em;
     border: none;
+    padding: 0 30px 0 5px;
+    /* Personnalisation de la flèche */
+    appearance: none;
+    background: url(./img/down_arrow.png) no-repeat center right 10px;
+    background-size: 15px;
 }
 
 form option {
     background: #202020;
-    border: none;
 }
 
 form .search-bar{
     background: #181818;
+    border-top: 2px solid #323232;
+    border-bottom: 2px solid #323232;
     flex-grow: 1;
-    padding: 0 1.5%;
+    padding: 1%;
 }
 
 form .search-bar:placeholder-shown {
-    color: #e7e7e7;
+    color: #e7e7e7ab;
     font-size: 1em;
-    padding: 0 1.5%;
 }
 
 form button {
+    cursor: pointer;
     color: #e7e7e7;
     font-family: 'Roboto';
     font-size: 1em;
-    padding:  0 1.5%;
+    position: relative;
+    padding:  0 50px 0 1%;
+}
+
+form button::before {
+    content: "";
+    width: 40px;
+    height: 100%;
+    background: url(./img/glass.png) no-repeat center center;
+    background-size: 50%;
+    position: absolute;
+    top: 0;
+    right: 5px;
 }
 
 .logo {
     height: 90%;
 }
-
-/* #filters form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px 5px 5px 5px;
-    background: red;
-    opacity: 1;
-    cursor: pointer;
-}
-
-#filters form.displayed {
-    opacity: 0;
-	pointer-events: none;
-} */
 
 /* -------------- SECTION COCKTAILLIST -------------- */
 
@@ -129,15 +136,15 @@ form button {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 5% 15% 0 5%;
-    margin: 100px 0 50px 0;
+    padding: 5% 250px 5% 5%;
+    margin: 14vh 0 7.5vh 0;
 }
 
 #cocktailList::after {
     content: "";
     display: block;
     width: 300px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 14vh);
     background: url(./img/barman-look.png) no-repeat top left;
     background-size: 110%;
     position: fixed;
@@ -146,11 +153,13 @@ form button {
 }
 
 .cocktail {
+    cursor: pointer;
     width: 275px;
     height: 275px;
     display: flex;
     flex-direction: column;
     align-content: flex-start;
+    overflow: hidden;
     position: relative;
     margin: 0 2.5% 2.5% 0;
 }
@@ -158,6 +167,7 @@ form button {
 .cocktail .picture {
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
 .cocktail-resume {
@@ -166,11 +176,17 @@ form button {
     position: absolute;
     bottom: 0;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 12.5px;
+    transform: translateY(100%);
+    transition: 0.25s ease-out;
 }
 
-.cocktail-resume.cocktail-title {
-    font-size: 1em;
+.cocktail:hover .cocktail-resume {
+    transform: translateY(0);
+}
+
+.cocktail-resume .cocktail-title {
+    font-size: 1.5em;
 }
 
 .cocktail-resume p{
@@ -189,7 +205,7 @@ form button {
     align-items: center;
     position: fixed;
     box-sizing: border-box;
-    padding: 100px 15% 50px 5%;
+    padding: 14vh 250px 7.5vh 5%;
     transform: translateY(-100vh);
     animation: 1s ease-in;
 }
@@ -202,7 +218,7 @@ form button {
     content: "";
     display: block;
     width: 300px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 14vh);
     background: url(./img/barman-glass.png) no-repeat top left;
     background-size: 110%;
     position: fixed;
@@ -235,20 +251,16 @@ form button {
 
 .backButton{
     cursor: pointer;
+    background: url(./img/left_arrow.png) no-repeat center left 5px;
+    background-size: 7.5px;
     color: #e7e7e7;
     font-size: 1em;
     display: flex;
     align-items: center;
     position: absolute;
-    top: 15vh;
-    left: 0;
-    padding: 15px;
-}
-
-.left-arrow {
-    fill: #e7e7e7;
-    width: 15px;
-    margin: 0 5px 0 0;
+    top: calc(15vh + 2%);
+    left: 2.5%;
+    padding: 15px 15px 15px 20px;
 }
 
 /* -------------- SECTION COCKTAILLIST -------------- */
