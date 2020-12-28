@@ -14,7 +14,6 @@ body {
     margin: 0;
 }
 
-
 main {
 	width: 100%;
     display: flex;
@@ -22,7 +21,12 @@ main {
     align-items: flex-start;
 }
 
-p, h1, h2 {
+p, h1, h2, h3 {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
     margin: 0;
 }
 
@@ -45,11 +49,18 @@ header {
     top: 0;
     box-sizing: border-box;
     padding: 1%;
-    z-index: 1;
+    z-index: 2;
 }
 
 .research-button {
     display: none;
+}
+
+.logo {
+    fill: #e7e7e7;
+    width: 200px;
+    height: auto;
+    margin: 0 0 0 1.5%;
 }
 
 form {
@@ -61,7 +72,7 @@ form {
     align-items: center;
     box-sizing: border-box;
     overflow: hidden;
-    margin: 0 2.5% 0 5%;
+    margin: 0 2.5% 0 4%;
 }
 
 form * {
@@ -127,10 +138,6 @@ form button::before {
     right: 5px;
 }
 
-.logo {
-    height: 90%;
-}
-
 /* -------------- SECTION COCKTAILLIST -------------- */
 
 #cocktailList {
@@ -147,8 +154,8 @@ form button::before {
     display: block;
     width: 300px;
     height: calc(100vh - 14vh);
-    background: url(./img/barman-look.png) no-repeat top left;
-    background-size: 110%;
+    background: url(./img/barman-look.png) no-repeat top -5% right;
+    background-size: 90%;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -167,8 +174,8 @@ form button::before {
 }
 
 .cocktail .picture {
-    height: 100%;
     width: 100%;
+    height: 100%;
     position: relative;
 }
 
@@ -179,7 +186,7 @@ form button::before {
     bottom: 0;
     box-sizing: border-box;
     padding: 12.5px;
-    transform: translateY(100%);
+    transform: translateY(105%);
     transition: 0.25s ease-out;
 }
 
@@ -187,7 +194,7 @@ form button::before {
     transform: translateY(0);
 }
 
-.cocktail-resume .cocktail-title {
+.cocktail-title {
     font-size: 1.5em;
 }
 
@@ -206,10 +213,12 @@ form button::before {
     justify-content: center;
     align-items: center;
     position: fixed;
+    top: 0;
     box-sizing: border-box;
     padding: 14vh 250px 7.5vh 5%;
     transform: translateY(-100vh);
     animation: 1s ease-in;
+    z-index: 1;
 }
 
 #cocktail.clicked {
@@ -221,8 +230,8 @@ form button::before {
     display: block;
     width: 300px;
     height: calc(100vh - 14vh);
-    background: url(./img/barman-glass.png) no-repeat top left;
-    background-size: 110%;
+    background: url(./img/barman-glass.png) no-repeat top -5% right;
+    background-size: 90%;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -240,18 +249,32 @@ form button::before {
 
 .cocktail-info{
     background-color: #2da6ef;
-    color: #e7e7e7;
     width: 35vw;
     box-sizing: border-box;
     padding: 20px;
 }
 
-#cocktail h2{
-    color: #e7e7e7;
+.cocktail-info h2 {
     font-size: 3em;
 }
 
-.backButton{
+.cocktail-info h3 {
+    color: #181818;
+    font-weight: 500;
+}
+
+.cocktail-info ol {
+    font-weight: 500;
+    padding: 0 0 0 20px;
+    margin: 20px 0 0 0;
+
+}
+
+.cocktail-info li {
+    margin: 5px 0 0 0;
+}
+
+.back-button{
     cursor: pointer;
     background: url(./img/left_arrow.png) no-repeat center left 5px;
     background-size: 7.5px;
@@ -260,7 +283,7 @@ form button::before {
     display: flex;
     align-items: center;
     position: absolute;
-    top: calc(15vh + 2%);
+    top: calc(14vh + 2%);
     left: 2.5%;
     padding: 15px 15px 15px 20px;
 }
@@ -291,6 +314,11 @@ footer span {
     /*------------------- HEADER ------------------*/
     header {
         justify-content: space-between;
+    }
+
+    .logo {
+        width: 125px;
+        margin: 0 0 0 15px;
     }
 
     .research-button {
@@ -371,7 +399,7 @@ footer span {
     #cocktailList {
         flex-direction: column;
         align-items: center;
-        padding: 25px 0 0 0;
+        padding: 15px;
         margin: 14vh 0 0 0;
     }
 
@@ -380,22 +408,73 @@ footer span {
     }
 
     .cocktail {
-        width: 225px;
-        height: 225px;
-        margin: 0 0 25px 0;
+        width: auto;
+        height: auto;
+        flex-direction: row;
+        margin: 0 0 15px 0;
+    }
+
+    .cocktail .picture {
+        width: 75px;
+        height: 75px;
     }
 
     .cocktail-resume {
+        height: 75px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: static;
         transform: translateY(0);
+        padding: 0 10px;
+    }
+
+    .cocktail-title {
+        font-size: 1.25em;
     }
 
     /* -------------- SECTION COCKTAIL -------------- */
     #cocktail {
-        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: scroll;
+        padding: 14vh 0 0 0;
+        transform: translateY(0);
     }
 
     #cocktail::after {
         display: none;
+    }
+
+    .cocktail-details {
+        flex-direction: column;
+    }
+
+    .cocktail-details .picture {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .cocktail-details .cocktail-info {
+        width: 100%;
+    }
+
+    .cocktail-info h2 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .cocktail-info h3 {
+        text-align: center;
+    }
+
+    .back-button {
+        background: url(./img/left_arrow.png) no-repeat center left 12.5px;
+        background-size: 7.5px;
+        top: 14vh;
+        left: 0;
+        padding: 20px 20px 20px 25px;
     }
 
     /*------------------- FOOTER ------------------*/
