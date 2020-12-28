@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	backButton.addEventListener('click', () => {
 		document.getElementById('cocktail').classList.toggle('displayed');
+		document.querySelector('html body').style.overflowY = 'scroll';
 	});
 
 	var searchForm = document.querySelector('header form');
@@ -17,6 +18,19 @@ document.addEventListener('DOMContentLoaded', function(){
 	searchForm.addEventListener('submit', searchFormSubmitted);
 
 	getCocktailsByLetter("a");
+	
+	/*------------------- MOBILE --------------------*/
+	var formDisplayer = document.querySelector('img.form-displayer');
+
+	formDisplayer.addEventListener('click',() => {
+		formDisplayer.classList.toggle('clicked');
+	});
+
+	var submitButton = document.querySelector('form button');
+	
+	submitButton.addEventListener('click', ()=>{
+		formDisplayer.classList.toggle('clicked');
+	});
 });
 
 function displayCocktailList(cocktailList){
@@ -95,6 +109,7 @@ function cocktailClicked(evt){
 
 	sectionCocktail.classList.toggle('displayed');
 	getCocktailById(this.getAttribute('data-id'));
+	document.querySelector('html body').style.overflowY = 'hidden';
 }
 
 function searchFormSubmitted(evt){
@@ -135,7 +150,11 @@ function displayCocktail(cocktail){
 
 	ingredients.forEach((ingredient, index) => {
 		var newIngredient = document.createElement('li');
-		newIngredient.innerText = ""+ingredient+" ("+cocktail['strMeasure'+(index+1)]+");";
+		if(cocktail['strMeasure'+(index+1)] !== null){
+			newIngredient.innerText = ""+ingredient+" ("+cocktail['strMeasure'+(index+1)]+") ;";
+		}else{
+			newIngredient.innerText = ""+ingredient+" ;";
+		}
 
 		ingredientList.appendChild(newIngredient);
 	});

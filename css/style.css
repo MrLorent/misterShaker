@@ -52,7 +52,7 @@ header {
     z-index: 1;
 }
 
-.research-button {
+.form-displayer {
     display: none;
 }
 
@@ -312,6 +312,11 @@ footer span {
 /*------------------- RESPONSIVE --------------------*/
 @media (max-width: 768px){
     /*------------------- GÉNÉRAL ------------------*/
+    body {
+        height: calc(100vh - 14vh);
+        overflow-y: scroll;
+        padding: 14vh 0 0 0;
+    }
 
     /*------------------- HEADER ------------------*/
     header {
@@ -323,7 +328,8 @@ footer span {
         margin: 0 0 0 15px;
     }
 
-    .research-button {
+    .form-displayer {
+        cursor: pointer;
         height: 30px;
         display: flex;
         margin: auto 15px;
@@ -348,7 +354,7 @@ footer span {
         transition: 0.5s ease-out;
     }
 
-    .research-button.clicked ~ form {
+    .form-displayer.clicked ~ form {
         height: 86vh;
         padding: 50px 25px;
     }
@@ -401,8 +407,8 @@ footer span {
     #cocktailList {
         flex-direction: column;
         align-items: center;
-        padding: 15px;
-        margin: 14vh 0 0 0;
+        padding: 15px 15px 0 15px;
+        margin: 0;
     }
 
     #cocktailList::after {
@@ -410,7 +416,7 @@ footer span {
     }
 
     .cocktail {
-        width: auto;
+        width: 100%;
         height: auto;
         flex-direction: row;
         margin: 0 0 15px 0;
