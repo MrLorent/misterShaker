@@ -49,7 +49,7 @@ header {
     top: 0;
     box-sizing: border-box;
     padding: 1%;
-    z-index: 2;
+    z-index: 1;
 }
 
 .research-button {
@@ -106,6 +106,9 @@ form option {
 }
 
 form .search-bar{
+    color: #e7e7e7;
+    font-family: 'Roboto';
+    font-size: 1em;
     background: #181818;
     border-top: 2px solid #323232;
     border-bottom: 2px solid #323232;
@@ -217,11 +220,10 @@ form button::before {
     box-sizing: border-box;
     padding: 14vh 250px 7.5vh 5%;
     transform: translateY(-100vh);
-    animation: 1s ease-in;
-    z-index: 1;
+    transition: 0.5s ease-out;
 }
 
-#cocktail.clicked {
+#cocktail.displayed {
     transform: translateY(0);
 }
 
@@ -439,7 +441,6 @@ footer span {
         justify-content: flex-start;
         overflow-y: scroll;
         padding: 14vh 0 0 0;
-        transform: translateY(0);
     }
 
     #cocktail::after {
