@@ -54,9 +54,10 @@ function displayCocktailList(cocktailList){
 	}else{
 		for(let i=0; i<cocktailList.drinks.length;i++){
 			var ingredients = [];
-	
-			ingredients = getCocktailIngredients(cocktailList.drinks[i]);
-	
+			
+			if(cocktailList.drinks[0].hasOwnProperty('strIngredient1')){
+				ingredients = getCocktailIngredients(cocktailList.drinks[i]);
+			}
 			generateCocktail(cocktailList.drinks[i].idDrink, cocktailList.drinks[i].strDrink, cocktailList.drinks[i].strDrinkThumb, ingredients);
 		}
 	}
@@ -93,9 +94,11 @@ function generateCocktail(id, name, picturePath, ingredients){
 	cocktailName.innerText = name;
 	cocktailResume.appendChild(cocktailName);
 
-	let cocktailIngredients = document.createElement('p');
-	cocktailIngredients.innerText = ""+ingredients[0]+", "+ingredients[1]+", "+ingredients[2]+"...";
-	cocktailResume.appendChild(cocktailIngredients);
+	if(ingredients[0] !== undefined){
+		let cocktailIngredients = document.createElement('p');
+		cocktailIngredients.innerText = ""+ingredients[0]+", "+ingredients[1]+", "+ingredients[2]+"...";
+		cocktailResume.appendChild(cocktailIngredients);
+	}
 
 	newCocktail.appendChild(cocktailResume);
 
