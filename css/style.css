@@ -152,6 +152,49 @@ form button::before {
     margin: 14vh 0 7.5vh 0;
 }
 
+.barman {
+    width: 350px;
+    height: calc(100vh - 14vh);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+#advising-barman {
+    display: none;
+}
+
+#petite-bulle {
+    opacity: 0;
+}
+
+#moy-bulle {
+    opacity: 0;
+}
+
+#grosse-bulle {
+    opacity: 0;
+}
+
+.barman:hover #petite-bulle,
+.barman:hover #moy-bulle,
+.barman:hover #grosse-bulle {
+    opacity: 1;
+}
+
+
+#grosse-bulle {
+    cursor: pointer;
+}
+
+.barman:hover #looking-barman {
+    display: none;
+}
+
+.barman:hover #advising-barman {
+    display: block;
+}
+
 /* #cocktailList::after {
     content: "";
     display: block;
