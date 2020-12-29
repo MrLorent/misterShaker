@@ -5,32 +5,38 @@
 
 const KEY = {key: '1'};
 
+/*----------------------- MAIN ------------------------*/ 
 document.addEventListener('DOMContentLoaded', function(){
+	/*------------------- LISTENERS -----------------*/
+	// Boutons retour vers la liste de cocktails
 	var backButton = document.querySelector('.back-button');
-
 	backButton.addEventListener('click', () => {
 		document.getElementById('cocktail').classList.toggle('displayed');
 		document.querySelector('html body').style.overflowY = 'scroll';
 	});
 
+	// Barre de recherche
 	var searchForm = document.querySelector('header form');
-
 	searchForm.addEventListener('submit', searchFormSubmitted);
 
-	getCocktailsByLetter("a");
-	
-	/*------------------- MOBILE --------------------*/
+	/*------------- LISTENERS (MOBILE) --------------*/
+	// Bouton pour afficher le formulaire en version
 	var formDisplayer = document.querySelector('img.form-displayer');
-
 	formDisplayer.addEventListener('click',() => {
 		formDisplayer.classList.toggle('clicked');
 	});
 
+	// Écouteur pour replier le formulaire une fois le bouton submit cliqué 
 	var submitButton = document.querySelector('form button');
-	
 	submitButton.addEventListener('click', ()=>{
 		formDisplayer.classList.toggle('clicked');
 	});
+
+	/*------------------- CONTENU -------------------*/
+	getCocktailsByLetter("a").then(cocktailList =>{
+		displayCocktailList(cocktailList);
+	});
+	
 });
 
 function displayCocktailList(cocktailList){
@@ -50,7 +56,7 @@ function displayCocktailList(cocktailList){
 		errorMessage.classList.add('error-message');
 		errorMessage.innerText = "No result found, sorry... ^^'";
 
-		document.getElementById('cocktailList').appendChild(errorMessage);
+		document.querySelector('#cocktailList').appendChild(errorMessage);
 	}else{
 		for(let i=0; i<cocktailList.drinks.length;i++){
 			var ingredients = [];
@@ -58,7 +64,7 @@ function displayCocktailList(cocktailList){
 			if(cocktailList.drinks[0].hasOwnProperty('strIngredient1')){
 				ingredients = getCocktailIngredients(cocktailList.drinks[i]);
 			}
-			generateCocktail(cocktailList.drinks[i].idDrink, cocktailList.drinks[i].strDrink, cocktailList.drinks[i].strDrinkThumb, ingredients);
+			createCocktailElement(cocktailList.drinks[i].idDrink, cocktailList.drinks[i].strDrink, cocktailList.drinks[i].strDrinkThumb, ingredients);
 		}
 	}
 }
@@ -75,7 +81,7 @@ function getCocktailIngredients(cocktail){
 		return ingredients;
 }
 
-function generateCocktail(id, name, picturePath, ingredients){
+function createCocktailElement(id, name, picturePath, ingredients){
 	let newCocktail = document.createElement('div');
 	newCocktail.dataset.id = id;
 	newCocktail.classList.add('cocktail');
@@ -111,24 +117,30 @@ function cocktailClicked(evt){
 	var sectionCocktail = document.getElementById('cocktail');
 
 	sectionCocktail.classList.toggle('displayed');
-	getCocktailById(this.getAttribute('data-id'));
+	getCocktailById(this.getAttribute('data-id')).then(cocktail => {
+		fillCocktailSection(cocktail);
+	});
 	document.querySelector('html body').style.overflowY = 'hidden';
 }
 
 function searchFormSubmitted(evt){
-	var typeOfResearch = document.querySelector('.search-type').value;
-	var userResearch = document.querySelector('.search-bar').value;
+	var researchType = document.querySelector('.search-type').value;
+	var research = document.querySelector('.search-bar').value;
 
 	evt.preventDefault();
 	
-	if(typeOfResearch === "name"){
-		searchCocktailByName(userResearch);
+	if(researchType === "name"){
+		searchCocktailsByName(research).then(cocktailsByName => {
+			displayCocktailList(cocktailsByName);
+		});
 	}else{
-		searchCocktailByIngredient(userResearch);
+		searchCocktailsByIngredient(research).then(cocktailsByIngredient => {
+			displayCocktailList(cocktailsByIngredient);
+		});
 	}
 }
 
-function displayCocktail(cocktail){
+function fillCocktailSection(cocktail){
 	var cocktailPicture = document.querySelector('#cocktail .picture');
 
 	cocktailPicture.setAttribute('src', ''+cocktail.strDrinkThumb+'');
@@ -171,9 +183,10 @@ async function getCocktailById(id){
 
 	try{
 		console.log('Cocktail clicked:', cocktail);
-		displayCocktail(cocktail.drinks[0]);
+		return cocktail.drinks[0];
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
@@ -183,32 +196,35 @@ async function getCocktailsByLetter(letter){
 
 	try{
 		console.log('Cocktail listed by letter', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
-async function searchCocktailByName(name){
+async function searchCocktailsByName(name){
 	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+name, KEY);
 	const cocktailList = await reponse.json();
 
 	try{
 		console.log('Cocktail listed by name', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
-async function searchCocktailByIngredient(ingredient){
+async function searchCocktailsByIngredient(ingredient){
 	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i='+ingredient, KEY);
 	const cocktailList = await reponse.json();
 
 	try{
 		console.log('Cocktail listed by ingredient', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
