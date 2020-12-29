@@ -148,11 +148,54 @@ form button::before {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
-    padding: 5% 250px 5% 5%;
+    padding: 5% 350px 5% 5%;
     margin: 14vh 0 7.5vh 0;
 }
 
-#cocktailList::after {
+.barman {
+    width: 350px;
+    height: calc(100vh - 14vh);
+    position: fixed;
+    right: 0;
+    bottom: 0;
+}
+
+#advising-barman {
+    display: none;
+}
+
+#petite-bulle {
+    opacity: 0;
+}
+
+#moy-bulle {
+    opacity: 0;
+}
+
+#grosse-bulle {
+    opacity: 0;
+}
+
+.barman:hover #petite-bulle,
+.barman:hover #moy-bulle,
+.barman:hover #grosse-bulle {
+    opacity: 1;
+}
+
+
+#grosse-bulle {
+    cursor: pointer;
+}
+
+.barman:hover #looking-barman {
+    display: none;
+}
+
+.barman:hover #advising-barman {
+    display: block;
+}
+
+/* #cocktailList::after {
     content: "";
     display: block;
     width: 300px;
@@ -162,7 +205,7 @@ form button::before {
     position: fixed;
     right: 0;
     bottom: 0;
-}
+} */
 
 .cocktail {
     cursor: pointer;
@@ -218,7 +261,7 @@ form button::before {
     position: fixed;
     top: 0;
     box-sizing: border-box;
-    padding: 14vh 250px 7.5vh 5%;
+    padding: 14vh 350px 7.5vh 5%;
     transform: translateY(-100vh);
     transition: 0.5s ease-out;
 }
@@ -227,7 +270,7 @@ form button::before {
     transform: translateY(0);
 }
 
-#cocktail::after{
+/* #cocktail::after{
     content: "";
     display: block;
     width: 300px;
@@ -237,7 +280,7 @@ form button::before {
     position: fixed;
     right: 0;
     bottom: 0;
-}
+} */
 
 .cocktail-details {
     display: flex;
