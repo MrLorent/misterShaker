@@ -160,21 +160,46 @@ form button::before {
     bottom: 0;
 }
 
+#eyes {
+    animation: bouge 5s ease alternate infinite;
+    animation-delay: 0.4s;
+  }
+
+@keyframes bouge {
+    0% { transform: translate(0px,0px); }
+    50% { transform: translate(-3px,-3px);}
+    80% { transform: translate(-3px,3px);}
+    100%{transform: translate(0px,0px);}
+}
+
+@keyframes cligne {
+        50% {
+          transform: scaleY(1.0);
+        }
+        100% {
+          transform: scaleY(1.1);
+        }
+}
+
 #advising-barman {
     display: none;
 }
 
 #petite-bulle {
     opacity: 0;
+    transition-delay: 0.1s
 }
 
 #moy-bulle {
     opacity: 0;
+    transition-delay: 0.2s
 }
 
 #grosse-bulle {
     opacity: 0;
+    transition-delay: 0.3s
 }
+
 
 .barman:hover #petite-bulle,
 .barman:hover #moy-bulle,
@@ -332,6 +357,81 @@ form button::before {
     left: 2.5%;
     padding: 15px 15px 15px 20px;
 }
+
+/* ---------------- SECTION ADVICE ---------------- */
+
+#advice{
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    padding: 14vh 350px 7.5vh 5%;
+    transform: translateY(-100vh);
+    transition: 0.5s ease-out;
+}
+
+#advice.clicked {
+    transform: translateY(0);
+}
+
+h4 {
+    font-size: 2em;
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+}
+
+.advice-details {
+    display: flex;
+    flex-direction: column ;
+}
+
+.advice-details .picture {
+    width: 25vw;
+    height: 25vw;
+    margin: 0 2.5% 0 0;
+}
+
+.advice-details .barman {
+    width: 380px;
+    height: calc(100vh - 14vh);
+    position: fixed;
+    right: 130px;
+    bottom: -80px;
+}
+
+.barman #another-barman {
+    display: none;
+}
+
+.barman:hover #thisone-barman {
+    display: none;
+}
+
+.barman:hover #another-barman {
+    display: block;
+}
+
+.barman #another-barman #bulle {
+    cursor: pointer;
+}
+
+.barman #another-barman:hover #bulle{
+    transform: scale(1.1);
+}
+
 
 /* -------------------- FOOTER -------------------- */
 footer {
