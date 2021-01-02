@@ -161,11 +161,12 @@ form button::before {
 }
 
 .eyes {
-    animation: bouge 5s ease alternate infinite;
+    animation: bouge-haut-bas 5s ease alternate infinite;
     animation-delay: 0.4s;
   }
 
-@keyframes bouge {
+
+@keyframes bouge-haut-bas {
     0% { transform: translate(0px,0px); }
     50% { transform: translate(-3px,-3px);}
     80% { transform: translate(-3px,3px);}
@@ -218,6 +219,14 @@ form button::before {
 
 .barman:hover #advising-barman {
     display: block;
+}
+
+#barman2 {
+    width: 350px;
+    height: calc(100vh - 14vh);
+    position: fixed;
+    right: 0;
+    bottom: 0;
 }
 
 /* #cocktailList::after {
@@ -356,7 +365,29 @@ form button::before {
     top: calc(14vh + 2%);
     left: 2.5%;
     padding: 15px 15px 15px 20px;
+    
 }
+
+.cocktail-details .barman {
+    width: 200px;
+    height: calc(100vh - 14vh);
+    position: fixed;
+    right: 130px;
+    bottom: -50px;
+}
+
+.cocktail #barman .barman-glass .eyes {
+    animation: bouge-gauche-bas 5s ease alternate infinite;
+    animation-delay: 0.4s;
+}
+
+@keyframes bouge-gauche-bas {
+    0% { transform: translate(0px,0px); }
+    50% { transform: translate(-3px,0px);}
+    80% { transform: translate(-3px,3px);}
+    100%{transform: translate(0px,0px);}
+}
+
 
 /* ---------------- SECTION ADVICE ---------------- */
 
