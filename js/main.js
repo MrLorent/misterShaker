@@ -5,77 +5,113 @@
 
 const KEY = {key: '1'};
 
+/*----------------------- MAIN ------------------------*/ 
 document.addEventListener('DOMContentLoaded', function(){
+	/*------------------- LISTENERS -----------------*/
+	// Boutons retour vers la liste de cocktails
 	var backButton = document.querySelector('.back-button');
-
 	backButton.addEventListener('click', () => {
 		document.getElementById('cocktail').classList.toggle('displayed');
 		document.querySelector('html body').style.overflowY = 'scroll';
 	});
 
+	// Barre de recherche
 	var searchForm = document.querySelector('header form');
-
 	searchForm.addEventListener('submit', searchFormSubmitted);
 
-	getCocktailsByLetter("a");
-	
-	/*------------------- MOBILE --------------------*/
+	/*------------- LISTENERS (MOBILE) --------------*/
+	// Bouton pour afficher le formulaire en version
 	var formDisplayer = document.querySelector('img.form-displayer');
-
 	formDisplayer.addEventListener('click',() => {
 		formDisplayer.classList.toggle('clicked');
 	});
 
+	// Écouteur pour replier le formulaire une fois le bouton submit cliqué 
 	var submitButton = document.querySelector('form button');
-	
 	submitButton.addEventListener('click', ()=>{
 		formDisplayer.classList.toggle('clicked');
 	});
+
+	/*------------------- CONTENU -------------------*/
+	getCocktailsByLetter("a").then(cocktailList =>{
+		displayCocktailList(cocktailList);
+	});
+	
 });
 
-function displayCocktailList(cocktailList){
-	var previousCocktails = document.querySelectorAll('#cocktailList .cocktail');
-	var previousErrorMessage = document.querySelector('.error-message');
+/*--------------------- TRIGGERS ---------------------*/
+function cocktailClicked(evt){
+	var sectionCocktail = document.querySelector('#cocktail');
 
+	displaySection(sectionCocktail);
+	getCocktailById(this.getAttribute('data-id')).then(cocktail => {
+		fillCocktailSection(cocktail);
+	});
+}
+
+function searchFormSubmitted(evt){
+	var researchType = document.querySelector('.search-type').value;
+	var research = document.querySelector('.search-bar').value;
+
+	evt.preventDefault();
+	
+	if(researchType === "name"){
+		searchCocktailsByName(research).then(cocktailsByName => {
+			displayCocktailList(cocktailsByName);
+		});
+	}else{
+		searchCocktailsByIngredient(research).then(cocktailsByIngredient => {
+			displayCocktailList(cocktailsByIngredient);
+		});
+	}
+}
+
+/*------------------- DISPLAYERS -------------------*/
+function displayCocktailList(cocktailList){
+	// SUPRESSION DES ÉLÉMENTS PRÉEXISTANTS
+	// Supression des cocktails
+	var previousCocktails = document.querySelectorAll('#cocktailList .cocktail');
 	previousCocktails.forEach((previousCocktail, index) => {
 		previousCocktail.remove();
 	});
-
+	// Supression d'un potentiel message d'erreur
+	var previousErrorMessage = document.querySelector('.error-message');
 	if(previousErrorMessage !== null){
 		previousErrorMessage.remove();
 	}
 
+	//AFFICHAGE DES NOUVEAUX ÉLÉMENTS
 	if(cocktailList.drinks === null){
+		// Affichage d'un message d'erreur si la liste est vide
 		var errorMessage = document.createElement('p');
 		errorMessage.classList.add('error-message');
 		errorMessage.innerText = "No result found, sorry... ^^'";
-
-		document.getElementById('cocktailList').appendChild(errorMessage);
+		document.querySelector('#cocktailList').appendChild(errorMessage);
 	}else{
 		for(let i=0; i<cocktailList.drinks.length;i++){
-			var ingredients = [];
-			
-			if(cocktailList.drinks[0].hasOwnProperty('strIngredient1')){
-				ingredients = getCocktailIngredients(cocktailList.drinks[i]);
-			}
-			generateCocktail(cocktailList.drinks[i].idDrink, cocktailList.drinks[i].strDrink, cocktailList.drinks[i].strDrinkThumb, ingredients);
+			createCocktailElement(cocktailList.drinks[i]);
 		}
 	}
 }
 
-function getCocktailIngredients(cocktail){
-		var count=1;
-		var ingredients = [];
-
-		while(cocktail['strIngredient'+count] !== null){
-			ingredients[count - 1] = cocktail['strIngredient'+count];
-			count++;
-		}
-
-		return ingredients;
+function displaySection(section){
+	section.classList.toggle('displayed');
+	document.querySelector('html body').style.overflowY = 'hidden';
 }
 
-function generateCocktail(id, name, picturePath, ingredients){
+/*---------------- ELEMENT CONSTRUCTORS -----------*/
+async function createCocktailElement(cocktail){
+	var id = cocktail.idDrink;
+	var name = cocktail.strDrink;
+	var picturePath = cocktail.strDrinkThumb;
+	var ingredients = [];
+
+	if(!cocktail.hasOwnProperty('strIngredient1')){
+		ingredients = getCocktailIngredients(await getCocktailById(id));
+	}else{
+		ingredients = getCocktailIngredients(cocktail);
+	}
+
 	let newCocktail = document.createElement('div');
 	newCocktail.dataset.id = id;
 	newCocktail.classList.add('cocktail');
@@ -94,11 +130,9 @@ function generateCocktail(id, name, picturePath, ingredients){
 	cocktailName.innerText = name;
 	cocktailResume.appendChild(cocktailName);
 
-	if(ingredients[0] !== undefined){
-		let cocktailIngredients = document.createElement('p');
-		cocktailIngredients.innerText = ""+ingredients[0]+", "+ingredients[1]+", "+ingredients[2]+"...";
-		cocktailResume.appendChild(cocktailIngredients);
-	}
+	let cocktailIngredients = document.createElement('p');
+	cocktailIngredients.innerText = ""+ingredients[0]+", "+ingredients[1]+", "+ingredients[2]+"...";
+	cocktailResume.appendChild(cocktailIngredients);
 
 	newCocktail.appendChild(cocktailResume);
 
@@ -107,28 +141,7 @@ function generateCocktail(id, name, picturePath, ingredients){
 	document.getElementById('cocktailList').appendChild(newCocktail);
 }
 
-function cocktailClicked(evt){
-	var sectionCocktail = document.getElementById('cocktail');
-
-	sectionCocktail.classList.toggle('displayed');
-	getCocktailById(this.getAttribute('data-id'));
-	document.querySelector('html body').style.overflowY = 'hidden';
-}
-
-function searchFormSubmitted(evt){
-	var typeOfResearch = document.querySelector('.search-type').value;
-	var userResearch = document.querySelector('.search-bar').value;
-
-	evt.preventDefault();
-	
-	if(typeOfResearch === "name"){
-		searchCocktailByName(userResearch);
-	}else{
-		searchCocktailByIngredient(userResearch);
-	}
-}
-
-function displayCocktail(cocktail){
+function fillCocktailSection(cocktail){
 	var cocktailPicture = document.querySelector('#cocktail .picture');
 
 	cocktailPicture.setAttribute('src', ''+cocktail.strDrinkThumb+'');
@@ -161,7 +174,18 @@ function displayCocktail(cocktail){
 
 		ingredientList.appendChild(newIngredient);
 	});
+}
 
+function getCocktailIngredients(cocktail){
+	var count=1;
+	var ingredients = [];
+
+	while(cocktail['strIngredient'+count] !== null){
+		ingredients[count - 1] = cocktail['strIngredient'+count];
+		count++;
+	}
+
+	return ingredients;
 }
 
 /*------------------ API REQUESTS -----------------*/
@@ -171,9 +195,10 @@ async function getCocktailById(id){
 
 	try{
 		console.log('Cocktail clicked:', cocktail);
-		displayCocktail(cocktail.drinks[0]);
+		return cocktail.drinks[0];
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
@@ -183,32 +208,35 @@ async function getCocktailsByLetter(letter){
 
 	try{
 		console.log('Cocktail listed by letter', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
-async function searchCocktailByName(name){
+async function searchCocktailsByName(name){
 	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s='+name, KEY);
 	const cocktailList = await reponse.json();
 
 	try{
 		console.log('Cocktail listed by name', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }
 
-async function searchCocktailByIngredient(ingredient){
+async function searchCocktailsByIngredient(ingredient){
 	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i='+ingredient, KEY);
 	const cocktailList = await reponse.json();
 
 	try{
 		console.log('Cocktail listed by ingredient', cocktailList);
-		displayCocktailList(cocktailList);
+		return cocktailList;
 	}catch(e){
 		console.log('Some error happened', e);
+		return null;
 	}
 }

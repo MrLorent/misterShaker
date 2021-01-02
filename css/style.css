@@ -160,7 +160,7 @@ form button::before {
     bottom: 0;
 }
 
-#eyes {
+.eyes {
     animation: bouge 5s ease alternate infinite;
     animation-delay: 0.4s;
   }
