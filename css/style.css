@@ -166,14 +166,17 @@ form button::before {
 
 #petite-bulle {
     opacity: 0;
+    transition-delay: 0.1s
 }
 
 #moy-bulle {
     opacity: 0;
+    transition-delay: 0.2s
 }
 
 #grosse-bulle {
     opacity: 0;
+    transition-delay: 0.3s
 }
 
 .barman:hover #petite-bulle,
@@ -181,7 +184,6 @@ form button::before {
 .barman:hover #grosse-bulle {
     opacity: 1;
 }
-
 
 #grosse-bulle {
     cursor: pointer;
@@ -195,17 +197,31 @@ form button::before {
     display: block;
 }
 
-/* #cocktailList::after {
-    content: "";
-    display: block;
-    width: 300px;
-    height: calc(100vh - 14vh);
-    background: url(./img/barman-look.png) no-repeat top -5% right;
-    background-size: 90%;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-} */
+.eyes {
+    transform-origin: initial;
+    animation: bouge-haut-bas 5s ease alternate infinite;
+    animation-delay: 0.4s;
+  }
+
+
+@keyframes bouge-haut-bas {
+    0% { transform: translate(0px,0px); }
+    50% { transform: translate(-3px,-3px);}
+    80% { transform: translate(-3px,3px);}
+    100%{transform: translate(0px,0px);}
+}
+
+@keyframes cligne {
+    0%{
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
 
 .cocktail {
     cursor: pointer;
@@ -275,18 +291,6 @@ form button::before {
     transform: translateY(0);
 }
 
-/* #cocktail::after{
-    content: "";
-    display: block;
-    width: 300px;
-    height: calc(100vh - 14vh);
-    background: url(./img/barman-glass.png) no-repeat top -5% right;
-    background-size: 90%;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-} */
-
 .cocktail-details {
     display: flex;
 }
@@ -336,6 +340,70 @@ form button::before {
     top: calc(14vh + 2%);
     left: 2.5%;
     padding: 15px 15px 15px 20px;
+}
+
+/* ---------------- SECTION ADVICE ---------------- */
+
+#advice{
+    background-color: #181818;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+    padding: 14vh 200px 7.5vh 5%;
+    transform: translateY(-100vh);
+    transition: 0.5s ease-out;
+}
+
+#advice.displayed {
+    transform: translateY(0);
+}
+
+#advice .barman {
+    width: 400px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0 0 2.5% 0;
+}
+
+.container {
+    display: flex;
+}
+
+.advice-details {
+    display: flex;
+    flex-direction: column ;
+}
+
+.advice-details .picture {
+    width: 25vw;
+    height: 25vw;
+    margin: 0 2.5% 0 0;
+}
+
+.barman #another-barman {
+    display: none;
+}
+
+.barman:hover #thisone-barman {
+    display: none;
+}
+
+.barman:hover #another-barman {
+    display: block;
+}
+
+.barman #another-barman #another-bulle {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 /* -------------------- FOOTER -------------------- */

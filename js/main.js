@@ -8,11 +8,24 @@ const KEY = {key: '1'};
 /*----------------------- MAIN ------------------------*/ 
 document.addEventListener('DOMContentLoaded', function(){
 	/*------------------- LISTENERS -----------------*/
+	// Bouton pour les conseils
+	var adviceButton = document.querySelector('#grosse-bulle');
+	adviceButton.addEventListener('click', adviceClicked);
+
+	var resetAdviceButton = document.querySelector('#another-bulle');
+	resetAdviceButton.addEventListener('click',()=>{
+		getRandomCocktail().then(randomCocktail => {
+			fillSection("advice", randomCocktail);
+		});
+	});
 	// Boutons retour vers la liste de cocktails
-	var backButton = document.querySelector('.back-button');
-	backButton.addEventListener('click', () => {
-		document.getElementById('cocktail').classList.toggle('displayed');
-		document.querySelector('html body').style.overflowY = 'scroll';
+	var backButtons = document.querySelectorAll('.back-button');
+
+	backButtons.forEach((backButton, index) => {
+		backButton.addEventListener('click', () => {
+			document.querySelector('section.displayed').classList.toggle('displayed');
+			document.querySelector('html body').style.overflowY = 'scroll';
+		});
 	});
 
 	// Barre de recherche
@@ -45,7 +58,7 @@ function cocktailClicked(evt){
 
 	displaySection(sectionCocktail);
 	getCocktailById(this.getAttribute('data-id')).then(cocktail => {
-		fillCocktailSection(cocktail);
+		fillSection("cocktail", cocktail);
 	});
 }
 
@@ -64,6 +77,15 @@ function searchFormSubmitted(evt){
 			displayCocktailList(cocktailsByIngredient);
 		});
 	}
+}
+
+function adviceClicked(evt){
+	var sectionAdvice = document.querySelector('#advice');
+
+	displaySection(sectionAdvice);
+	getRandomCocktail().then(randomCocktail => {
+		fillSection("advice", randomCocktail);
+	});
 }
 
 /*------------------- DISPLAYERS -------------------*/
@@ -141,26 +163,26 @@ async function createCocktailElement(cocktail){
 	document.getElementById('cocktailList').appendChild(newCocktail);
 }
 
-function fillCocktailSection(cocktail){
-	var cocktailPicture = document.querySelector('#cocktail .picture');
+function fillSection(section, cocktail){
+	var cocktailPicture = document.querySelector('#'+section+' .picture');
 
 	cocktailPicture.setAttribute('src', ''+cocktail.strDrinkThumb+'');
 
-	var cocktailName = document.querySelector('#cocktail h2');
+	var cocktailName = document.querySelector('#'+section+' h2');
 
 	cocktailName.innerText = cocktail.strDrink;
 
-	var cocktailCategory = document.querySelector('#cocktail h3');
+	var cocktailCategory = document.querySelector('#'+section+' h3');
 
 	cocktailCategory.innerHTML = cocktail.strCategory;
 
-	var previousIngredients = document.querySelectorAll('.ingredients li');
+	var previousIngredients = document.querySelectorAll('#'+section+' .ingredients li');
 
 	previousIngredients.forEach((previousIngredient, index) => {
 		previousIngredient.remove();
 	});
 
-	var ingredientList = document.querySelector('.ingredients');
+	var ingredientList = document.querySelector('#'+section+' .ingredients');
 
 	var ingredients = getCocktailIngredients(cocktail);
 
@@ -238,5 +260,17 @@ async function searchCocktailsByIngredient(ingredient){
 	}catch(e){
 		console.log('Some error happened', e);
 		return null;
+	}
+}
+
+async function getRandomCocktail(){
+	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php', KEY);
+	const randomCocktail = await reponse.json();
+
+    try{
+		console.log('Cocktail random:', randomCocktail);
+		return randomCocktail.drinks[0];
+	}catch(e){
+		console.log('Some error happened', e);
 	}
 }
