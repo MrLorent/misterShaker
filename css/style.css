@@ -1,4 +1,13 @@
-/*--------------------- GENERAL ----------------------*/
+/*###################################################*/
+/*###################### FONTS ######################*/
+/*###################################################*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/*###################################################*/
+/*##################### GENERAL #####################*/
+/*###################################################*/
+
 html {
 	width: 100%;
     height: 100%;
@@ -38,7 +47,11 @@ select {
     border: none;
 }
 
-/* ----------------- HEADER ----------------- */
+/*##################################################*/
+/*###################### MAIN ######################*/
+/*##################################################*/
+
+/*--------------------- HEADER -------------------- */
 header {
     background: #202020;
     width: 100%;
@@ -95,7 +108,7 @@ form select {
     font-size: 1em;
     border: none;
     padding: 0 30px 0 5px;
-    /* Personnalisation de la flèche */
+    /* Personnalisation de la flèche: */
     appearance: none;
     background: url(./img/down_arrow.png) no-repeat center right 10px;
     background-size: 15px;
@@ -141,17 +154,7 @@ form button::before {
     right: 5px;
 }
 
-/* -------------- SECTION COCKTAILLIST -------------- */
-
-#cocktailList {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    padding: 5% 350px 5% 5%;
-    margin: 14vh 0 7.5vh 0;
-}
-
+/*-------------------- BARMAN DIV -------------------*/
 .barman {
     width: 350px;
     height: calc(100vh - 14vh);
@@ -160,67 +163,35 @@ form button::before {
     bottom: 0;
 }
 
-#advising-barman {
-    display: none;
-}
-
-#petite-bulle {
-    opacity: 0;
-    transition-delay: 0.1s
-}
-
-#moy-bulle {
-    opacity: 0;
-    transition-delay: 0.2s
-}
-
-#grosse-bulle {
-    opacity: 0;
-    transition-delay: 0.3s
-}
-
-.barman:hover #petite-bulle,
-.barman:hover #moy-bulle,
-.barman:hover #grosse-bulle {
-    opacity: 1;
-}
-
-#grosse-bulle {
-    cursor: pointer;
-}
-
-.barman:hover #looking-barman {
-    display: none;
-}
-
-.barman:hover #advising-barman {
-    display: block;
-}
-
-.eyes {
-    transform-origin: initial;
-    animation: bouge-haut-bas 5s ease alternate infinite;
-    animation-delay: 0.4s;
-  }
-
-
-@keyframes bouge-haut-bas {
-    0% { transform: translate(0px,0px); }
-    50% { transform: translate(-3px,-3px);}
-    80% { transform: translate(-3px,3px);}
-    100%{transform: translate(0px,0px);}
-}
-
-@keyframes cligne {
-    0%{
-        transform: scaleY(1);
+@keyframes looking-eyes {
+    0% {
+        transform: translate(0px,0px) scaleY(0);
     }
-    50% {
-        transform: scaleY(0);
+    10% {
+        transform: translate(0px,0px) scaleY(1);
     }
-    100% {
-        transform: scaleY(1);
+    25% {
+        transform: translate(-3px,-3px);
     }
+    75% {
+        transform: translate(-3px,3px);
+    }
+    90%{
+        transform: translate(0px,0px) scaleY(1);
+    }
+    100%{
+        transform: translate(0px,0px) scaleY(0);
+    }
+}
+
+/*--------------- SECTION COCKTAILLIST ---------------*/
+#cocktailList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 5% 350px 5% 5%;
+    margin: 14vh 0 7.5vh 0;
 }
 
 .cocktail {
@@ -265,8 +236,71 @@ form button::before {
     margin: 5px 0 0 0;
 }
 
-/* ---------------- SECTION COCKTAIL ---------------- */
+/* SECTION COCKTAILLIST - BARMAN DIV */
+#looking-barman .st0{fill:#F3C798;}
+#looking-barman .st1{fill:#F7D9B0;}
+#looking-barman .st2{fill:#5A4E41;}
+#looking-barman .st3{fill:#695D4E;}
+#looking-barman .st4{fill:#525252;}
+#looking-barman .st5{fill:#D3D3D3;}
+#looking-barman .st6{fill:#F4F4F4;}
+#looking-barman .st7{fill:#1E4774;}
+#looking-barman .st8{fill:#131313;}
+#looking-barman .st9{fill:#DC7582;}
+#looking-barman .st10{fill:#26292B;}
 
+#advicing-barman .st0{fill:#F2C697;}
+#advicing-barman .st1{fill:#F6D8AF;}
+#advicing-barman .st2{fill:#594D40;}
+#advicing-barman .st3{fill:#685D4D;}
+#advicing-barman .st4{fill:#515252;}
+#advicing-barman .st5{fill:#D2D2D2;}
+#advicing-barman .st6{fill:#F3F3F3;}
+#advicing-barman .st7{fill:#1D4774;}
+#advicing-barman .st8{fill:#26282B;}
+#advicing-barman .st9{fill:#DA7580;}
+
+#advicing-barman #barman{
+    display: none;
+}
+
+.barman:hover #looking-barman {
+    display: none;
+}
+
+.barman:hover #advicing-barman #barman{
+    display: block;
+}
+
+#little-bubble {
+    opacity: 0;
+    transition-delay: 0.1s;
+}
+
+#medium-bubble {
+    opacity: 0;
+    transition-delay: 0.3s
+}
+
+#big-bubble {
+    cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.5s
+}
+
+.barman:hover #little-bubble,
+.barman:hover #medium-bubble,
+.barman:hover #big-bubble {
+    opacity: 1;
+}
+
+#looking-barman .eyes {
+    transform-origin: 18.5% 18.5%;
+    animation: looking-eyes 4s ease-in-out alternate infinite;
+}
+
+
+/* ---------------- SECTION COCKTAIL ---------------- */
 #cocktail {
     background-color: #181818;
     width: 100%;
@@ -281,10 +315,6 @@ form button::before {
     padding: 14vh 350px 7.5vh 5%;
     transform: translateY(-100vh);
     transition: 0.5s ease-out;
-}
-
-#drinking-barman{
-    transform: scale(0.9);
 }
 
 #cocktail.displayed {
@@ -342,8 +372,31 @@ form button::before {
     padding: 15px 15px 15px 20px;
 }
 
-/* ---------------- SECTION ADVICE ---------------- */
+/* SECTION COCKTAIL - BARMAN DIV */
+#drinking-barman .st0{fill:#26292B;}
+#drinking-barman .st1{fill:#F3C798;}
+#drinking-barman .st2{fill:#F7D9B0;}
+#drinking-barman .st3{fill:#5A4E41;}
+#drinking-barman .st4{fill:#695D4E;}
+#drinking-barman .st5{fill:#525252;}
+#drinking-barman .st6{fill:#D3D3D3;}
+#drinking-barman .st7{fill:#F4F4F4;}
+#drinking-barman .st8{fill:#1E4774;}
+#drinking-barman .st9{enable-background:new    ;}
+#drinking-barman .st10{fill:#B2D1D6;}
+#drinking-barman .st11{fill:#DFEDEF;}
+#drinking-barman .st12{fill:#AE297E;}
+#drinking-barman .st13{fill:#75215B;}
+#drinking-barman .st14{fill:#03AAE1;}
+#drinking-barman .st15{fill:#DC7582;}
+#drinking-barman .st16{fill:#F3C799;}
 
+#drinking-barman{
+    transform: scale(0.9);
+}
+
+
+/* ---------------- SECTION ADVICE ---------------- */
 #advice{
     background-color: #181818;
     width: 100%;
@@ -364,10 +417,6 @@ form button::before {
     transform: translateY(0);
 }
 
-#advice .barman {
-    width: 400px;
-}
-
 h1 {
     font-size: 2em;
     font-weight: bold;
@@ -376,11 +425,11 @@ h1 {
 
 .container {
     display: flex;
+    flex-direction: column;
 }
 
 .advice-details {
     display: flex;
-    flex-direction: column ;
 }
 
 .advice-details .picture {
@@ -389,19 +438,46 @@ h1 {
     margin: 0 2.5% 0 0;
 }
 
-.barman #another-barman {
+/* SECTION ADVICE - BARMAN DIV */
+#showing-barman .st0{fill:#F3C798;}
+#showing-barman .st1{fill:#F7D9B0;}
+#showing-barman .st2{fill:#5A4E41;}
+#showing-barman .st3{fill:#695D4E;}
+#showing-barman .st4{fill:#525252;}
+#showing-barman .st5{fill:#F4F4F4;}
+#showing-barman .st6{fill:#D3D3D3;}
+#showing-barman .st7{fill:#1E4774;}
+#showing-barman .st8{fill:#F3C799;}
+#showing-barman .st9{fill:#26292B;}
+
+#asking-barman .st0{fill:#F3C798;}
+#asking-barman .st1{fill:#F7D9B0;}
+#asking-barman .st2{fill:#5A4E41;}
+#asking-barman .st3{fill:#695D4E;}
+#asking-barman .st4{fill:#525252;}
+#asking-barman .st5{fill:#F4F4F4;}
+#asking-barman .st6{fill:#D3D3D3;}
+#asking-barman .st7{fill:#1E4774;}
+#asking-barman .st8{fill:#F3C799;}
+#asking-barman .st9{fill:#26292B;}
+
+#advice .barman {
+    width: 400px;
+}
+
+#asking-barman {
     display: none;
 }
 
-.barman:hover #thisone-barman {
+.barman:hover #showing-barman {
     display: none;
 }
 
-.barman:hover #another-barman {
+.barman:hover #asking-barman {
     display: block;
 }
 
-.barman #another-barman #another-bulle {
+.barman #asking-barman #question-bubble {
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -424,10 +500,16 @@ footer span {
 }
 
 
+/*###################################################*/
+/*#################### RESPONSIVE ###################*/
+/*###################################################*/
 
-/*------------------- RESPONSIVE --------------------*/
 @media (max-width: 768px){
-    /*------------------- GÉNÉRAL ------------------*/
+
+    /*##############################################*/
+    /*################### GENERAL ##################*/
+    /*##############################################*/
+
     body {
         height: calc(100vh - 14vh);
         overflow-y: scroll;
@@ -437,6 +519,10 @@ footer span {
     .barman {
         display: none;
     }
+
+    /*##############################################*/
+    /*#################### MAIN ####################*/
+    /*##############################################*/
 
     /*------------------- HEADER ------------------*/
     header {
@@ -459,7 +545,7 @@ footer span {
         background: #181818;
         border-radius: 0;
         width: 100%;
-        height: 0;
+        height: 86vh;
         overflow: hidden;
         box-sizing: border-box;
         flex-grow: 0;
@@ -469,14 +555,15 @@ footer span {
         position: absolute;
         top: 14vh;
         left: 0;
-        padding: 0 25px;
+        padding: 50px 25px;
         margin: 0;
-        transition: 0.5s ease-out;
+        transform-origin: top;
+        transform: scaleY(0);
+        transition: 0.25s ease-out;
     }
 
     .form-displayer.clicked ~ form {
-        height: 86vh;
-        padding: 50px 25px;
+        transform: scaleY(1);
     }
 
     form * {
@@ -525,6 +612,7 @@ footer span {
 
     /*------------ SECTION COCKTAILLIST -----------*/
     #cocktailList {
+        min-height: calc(100vh - 14vh - 10vh);
         flex-direction: column;
         align-items: center;
         padding: 15px 15px 0 15px;
@@ -547,14 +635,14 @@ footer span {
         height: 75px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         position: static;
         transform: translateY(0);
-        padding: 0 10px;
+        padding: 5px;
     }
 
     .cocktail-title {
-        font-size: 1.25em;
+        font-size: 1em;
     }
 
     /* -------------- SECTION COCKTAIL -------------- */
