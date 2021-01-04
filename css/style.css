@@ -571,14 +571,14 @@ footer span {
         height: 75px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         position: static;
         transform: translateY(0);
-        padding: 0 10px;
+        padding: 5px;
     }
 
     .cocktail-title {
-        font-size: 1.25em;
+        font-size: 1em;
     }
 
     /* -------------- SECTION COCKTAIL -------------- */
