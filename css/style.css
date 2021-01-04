@@ -237,6 +237,29 @@ form button::before {
 }
 
 /* SECTION COCKTAILLIST - BARMAN DIV */
+#looking-barman .st0{fill:#F3C798;}
+#looking-barman .st1{fill:#F7D9B0;}
+#looking-barman .st2{fill:#5A4E41;}
+#looking-barman .st3{fill:#695D4E;}
+#looking-barman .st4{fill:#525252;}
+#looking-barman .st5{fill:#D3D3D3;}
+#looking-barman .st6{fill:#F4F4F4;}
+#looking-barman .st7{fill:#1E4774;}
+#looking-barman .st8{fill:#131313;}
+#looking-barman .st9{fill:#DC7582;}
+#looking-barman .st10{fill:#26292B;}
+
+#advicing-barman .st0{fill:#F2C697;}
+#advicing-barman .st1{fill:#F6D8AF;}
+#advicing-barman .st2{fill:#594D40;}
+#advicing-barman .st3{fill:#685D4D;}
+#advicing-barman .st4{fill:#515252;}
+#advicing-barman .st5{fill:#D2D2D2;}
+#advicing-barman .st6{fill:#F3F3F3;}
+#advicing-barman .st7{fill:#1D4774;}
+#advicing-barman .st8{fill:#26282B;}
+#advicing-barman .st9{fill:#DA7580;}
+
 #advicing-barman #barman{
     display: none;
 }
@@ -350,6 +373,24 @@ form button::before {
 }
 
 /* SECTION COCKTAIL - BARMAN DIV */
+#drinking-barman .st0{fill:#26292B;}
+#drinking-barman .st1{fill:#F3C798;}
+#drinking-barman .st2{fill:#F7D9B0;}
+#drinking-barman .st3{fill:#5A4E41;}
+#drinking-barman .st4{fill:#695D4E;}
+#drinking-barman .st5{fill:#525252;}
+#drinking-barman .st6{fill:#D3D3D3;}
+#drinking-barman .st7{fill:#F4F4F4;}
+#drinking-barman .st8{fill:#1E4774;}
+#drinking-barman .st9{enable-background:new    ;}
+#drinking-barman .st10{fill:#B2D1D6;}
+#drinking-barman .st11{fill:#DFEDEF;}
+#drinking-barman .st12{fill:#AE297E;}
+#drinking-barman .st13{fill:#75215B;}
+#drinking-barman .st14{fill:#03AAE1;}
+#drinking-barman .st15{fill:#DC7582;}
+#drinking-barman .st16{fill:#F3C799;}
+
 #drinking-barman{
     transform: scale(0.9);
 }
@@ -398,6 +439,28 @@ h1 {
 }
 
 /* SECTION ADVICE - BARMAN DIV */
+#showing-barman .st0{fill:#F3C798;}
+#showing-barman .st1{fill:#F7D9B0;}
+#showing-barman .st2{fill:#5A4E41;}
+#showing-barman .st3{fill:#695D4E;}
+#showing-barman .st4{fill:#525252;}
+#showing-barman .st5{fill:#F4F4F4;}
+#showing-barman .st6{fill:#D3D3D3;}
+#showing-barman .st7{fill:#1E4774;}
+#showing-barman .st8{fill:#F3C799;}
+#showing-barman .st9{fill:#26292B;}
+
+#asking-barman .st0{fill:#F3C798;}
+#asking-barman .st1{fill:#F7D9B0;}
+#asking-barman .st2{fill:#5A4E41;}
+#asking-barman .st3{fill:#695D4E;}
+#asking-barman .st4{fill:#525252;}
+#asking-barman .st5{fill:#F4F4F4;}
+#asking-barman .st6{fill:#D3D3D3;}
+#asking-barman .st7{fill:#1E4774;}
+#asking-barman .st8{fill:#F3C799;}
+#asking-barman .st9{fill:#26292B;}
+
 #advice .barman {
     width: 400px;
 }
