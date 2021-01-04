@@ -5,20 +5,26 @@
 
 const KEY = {key: '1'};
 
-/*----------------------- MAIN ------------------------*/ 
+/*###################################################*/
+/*####################### MAIN ######################*/
+/*###################################################*/
+
 document.addEventListener('DOMContentLoaded', function(){
+
 	/*------------------- LISTENERS -----------------*/
-	// Bouton pour les conseils
-	var adviceButton = document.querySelector('#grosse-bulle');
+
+	// Bouton pour les conseils du barman
+	var adviceButton = document.querySelector('#big-bubble');
 	adviceButton.addEventListener('click', adviceClicked);
 
-	var resetAdviceButton = document.querySelector('#another-bulle');
+	var resetAdviceButton = document.querySelector('#question-bubble');
 	resetAdviceButton.addEventListener('click',()=>{
 		getRandomCocktail().then(randomCocktail => {
 			fillSection("advice", randomCocktail);
 		});
 	});
-	// Boutons retour vers la liste de cocktails
+
+	// Boutons de retour vers la liste de cocktails
 	var backButtons = document.querySelectorAll('.back-button');
 
 	backButtons.forEach((backButton, index) => {
@@ -33,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function(){
 	searchForm.addEventListener('submit', searchFormSubmitted);
 
 	/*------------- LISTENERS (MOBILE) --------------*/
+
 	// Bouton pour afficher le formulaire en version
 	var formDisplayer = document.querySelector('img.form-displayer');
 	formDisplayer.addEventListener('click',() => {
@@ -46,13 +53,18 @@ document.addEventListener('DOMContentLoaded', function(){
 	});
 
 	/*------------------- CONTENU -------------------*/
+
 	getCocktailsByLetter("a").then(cocktailList =>{
 		displayCocktailList(cocktailList);
 	});
 	
 });
 
-/*--------------------- TRIGGERS ---------------------*/
+
+/*###################################################*/
+/*##################### TRIGGERS ####################*/
+/*###################################################*/
+
 function cocktailClicked(evt){
 	var sectionCocktail = document.querySelector('#cocktail');
 
@@ -88,7 +100,11 @@ function adviceClicked(evt){
 	});
 }
 
-/*------------------- DISPLAYERS -------------------*/
+
+/*###################################################*/
+/*#################### DISPLAYERS ###################*/
+/*###################################################*/
+
 function displayCocktailList(cocktailList){
 	// SUPRESSION DES ÉLÉMENTS PRÉEXISTANTS
 	// Supression des cocktails
@@ -121,7 +137,11 @@ function displaySection(section){
 	document.querySelector('html body').style.overflowY = 'hidden';
 }
 
-/*---------------- ELEMENT CONSTRUCTORS -----------*/
+
+/*###################################################*/
+/*############### ELEMENT CONSTRUCTORS ##############*/
+/*###################################################*/
+
 async function createCocktailElement(cocktail){
 	var id = cocktail.idDrink;
 	var name = cocktail.strDrink;
@@ -210,7 +230,10 @@ function getCocktailIngredients(cocktail){
 	return ingredients;
 }
 
-/*------------------ API REQUESTS -----------------*/
+/*###################################################*/
+/*################### API REQUESTS ##################*/
+/*###################################################*/
+
 async function getCocktailById(id){
 	const reponse = await fetch('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i='+id, KEY);
 	const cocktail = await reponse.json();

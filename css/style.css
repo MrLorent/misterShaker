@@ -1,4 +1,13 @@
-/*--------------------- GENERAL ----------------------*/
+/*###################################################*/
+/*###################### FONTS ######################*/
+/*###################################################*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/*###################################################*/
+/*##################### GENERAL #####################*/
+/*###################################################*/
+
 html {
 	width: 100%;
     height: 100%;
@@ -38,7 +47,11 @@ select {
     border: none;
 }
 
-/* ----------------- HEADER ----------------- */
+/*##################################################*/
+/*###################### MAIN ######################*/
+/*##################################################*/
+
+/*--------------------- HEADER -------------------- */
 header {
     background: #202020;
     width: 100%;
@@ -95,7 +108,7 @@ form select {
     font-size: 1em;
     border: none;
     padding: 0 30px 0 5px;
-    /* Personnalisation de la flèche */
+    /* Personnalisation de la flèche: */
     appearance: none;
     background: url(./img/down_arrow.png) no-repeat center right 10px;
     background-size: 15px;
@@ -141,17 +154,7 @@ form button::before {
     right: 5px;
 }
 
-/* -------------- SECTION COCKTAILLIST -------------- */
-
-#cocktailList {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    padding: 5% 350px 5% 5%;
-    margin: 14vh 0 7.5vh 0;
-}
-
+/*-------------------- BARMAN DIV -------------------*/
 .barman {
     width: 350px;
     height: calc(100vh - 14vh);
@@ -160,67 +163,35 @@ form button::before {
     bottom: 0;
 }
 
-#advising-barman {
-    display: none;
-}
-
-#petite-bulle {
-    opacity: 0;
-    transition-delay: 0.1s
-}
-
-#moy-bulle {
-    opacity: 0;
-    transition-delay: 0.2s
-}
-
-#grosse-bulle {
-    opacity: 0;
-    transition-delay: 0.3s
-}
-
-.barman:hover #petite-bulle,
-.barman:hover #moy-bulle,
-.barman:hover #grosse-bulle {
-    opacity: 1;
-}
-
-#grosse-bulle {
-    cursor: pointer;
-}
-
-.barman:hover #looking-barman {
-    display: none;
-}
-
-.barman:hover #advising-barman {
-    display: block;
-}
-
-.eyes {
-    transform-origin: initial;
-    animation: bouge-haut-bas 5s ease alternate infinite;
-    animation-delay: 0.4s;
-  }
-
-
-@keyframes bouge-haut-bas {
-    0% { transform: translate(0px,0px); }
-    50% { transform: translate(-3px,-3px);}
-    80% { transform: translate(-3px,3px);}
-    100%{transform: translate(0px,0px);}
-}
-
-@keyframes cligne {
-    0%{
-        transform: scaleY(1);
+@keyframes looking-eyes {
+    0% {
+        transform: translate(0px,0px) scaleY(0);
     }
-    50% {
-        transform: scaleY(0);
+    10% {
+        transform: translate(0px,0px) scaleY(1);
     }
-    100% {
-        transform: scaleY(1);
+    25% {
+        transform: translate(-3px,-3px);
     }
+    75% {
+        transform: translate(-3px,3px);
+    }
+    90%{
+        transform: translate(0px,0px) scaleY(1);
+    }
+    100%{
+        transform: translate(0px,0px) scaleY(0);
+    }
+}
+
+/*--------------- SECTION COCKTAILLIST ---------------*/
+#cocktailList {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 5% 350px 5% 5%;
+    margin: 14vh 0 7.5vh 0;
 }
 
 .cocktail {
@@ -265,8 +236,48 @@ form button::before {
     margin: 5px 0 0 0;
 }
 
-/* ---------------- SECTION COCKTAIL ---------------- */
+/* SECTION COCKTAILLIST - BARMAN DIV */
+#advicing-barman #barman{
+    display: none;
+}
 
+.barman:hover #looking-barman {
+    display: none;
+}
+
+.barman:hover #advicing-barman #barman{
+    display: block;
+}
+
+#little-bubble {
+    opacity: 0;
+    transition-delay: 0.1s;
+}
+
+#medium-bubble {
+    opacity: 0;
+    transition-delay: 0.3s
+}
+
+#big-bubble {
+    cursor: pointer;
+    opacity: 0;
+    transition-delay: 0.5s
+}
+
+.barman:hover #little-bubble,
+.barman:hover #medium-bubble,
+.barman:hover #big-bubble {
+    opacity: 1;
+}
+
+#looking-barman .eyes {
+    transform-origin: 18.5% 18.5%;
+    animation: looking-eyes 4s ease-in-out alternate infinite;
+}
+
+
+/* ---------------- SECTION COCKTAIL ---------------- */
 #cocktail {
     background-color: #181818;
     width: 100%;
@@ -281,10 +292,6 @@ form button::before {
     padding: 14vh 350px 7.5vh 5%;
     transform: translateY(-100vh);
     transition: 0.5s ease-out;
-}
-
-#drinking-barman{
-    transform: scale(0.9);
 }
 
 #cocktail.displayed {
@@ -342,8 +349,13 @@ form button::before {
     padding: 15px 15px 15px 20px;
 }
 
-/* ---------------- SECTION ADVICE ---------------- */
+/* SECTION COCKTAIL - BARMAN DIV */
+#drinking-barman{
+    transform: scale(0.9);
+}
 
+
+/* ---------------- SECTION ADVICE ---------------- */
 #advice{
     background-color: #181818;
     width: 100%;
@@ -364,10 +376,6 @@ form button::before {
     transform: translateY(0);
 }
 
-#advice .barman {
-    width: 400px;
-}
-
 h1 {
     font-size: 2em;
     font-weight: bold;
@@ -376,11 +384,11 @@ h1 {
 
 .container {
     display: flex;
+    flex-direction: column;
 }
 
 .advice-details {
     display: flex;
-    flex-direction: column ;
 }
 
 .advice-details .picture {
@@ -389,19 +397,24 @@ h1 {
     margin: 0 2.5% 0 0;
 }
 
-.barman #another-barman {
+/* SECTION ADVICE - BARMAN DIV */
+#advice .barman {
+    width: 400px;
+}
+
+#asking-barman {
     display: none;
 }
 
-.barman:hover #thisone-barman {
+.barman:hover #showing-barman {
     display: none;
 }
 
-.barman:hover #another-barman {
+.barman:hover #asking-barman {
     display: block;
 }
 
-.barman #another-barman #another-bulle {
+.barman #asking-barman #question-bubble {
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -424,10 +437,16 @@ footer span {
 }
 
 
+/*###################################################*/
+/*#################### RESPONSIVE ###################*/
+/*###################################################*/
 
-/*------------------- RESPONSIVE --------------------*/
 @media (max-width: 768px){
-    /*------------------- GÉNÉRAL ------------------*/
+
+    /*##############################################*/
+    /*################### GENERAL ##################*/
+    /*##############################################*/
+
     body {
         height: calc(100vh - 14vh);
         overflow-y: scroll;
@@ -437,6 +456,10 @@ footer span {
     .barman {
         display: none;
     }
+
+    /*##############################################*/
+    /*#################### MAIN ####################*/
+    /*##############################################*/
 
     /*------------------- HEADER ------------------*/
     header {
@@ -459,7 +482,7 @@ footer span {
         background: #181818;
         border-radius: 0;
         width: 100%;
-        height: 0;
+        height: 86vh;
         overflow: hidden;
         box-sizing: border-box;
         flex-grow: 0;
@@ -469,14 +492,15 @@ footer span {
         position: absolute;
         top: 14vh;
         left: 0;
-        padding: 0 25px;
+        padding: 50px 25px;
         margin: 0;
-        transition: 0.5s ease-out;
+        transform-origin: top;
+        transform: scaleY(0);
+        transition: 0.25s ease-out;
     }
 
     .form-displayer.clicked ~ form {
-        height: 86vh;
-        padding: 50px 25px;
+        transform: scaleY(1);
     }
 
     form * {
