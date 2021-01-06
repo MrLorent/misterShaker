@@ -14,6 +14,17 @@ html {
     color: #e7e7e7;
 	font-family: 'Roboto';
     line-height: 1.15;
+    scrollbar-color:  #323232 #181818;
+    scrollbar-width:  thin;
+}
+
+::-webkit-scrollbar {
+    background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #323232;
+    border-radius: 10px;
 }
 
 body {
@@ -45,6 +56,12 @@ button,
 select {
     background: none;
     border: none;
+}
+
+/* CHROME */
+input:focus,
+select:focus {
+    outline: none;
 }
 
 /*##################################################*/
@@ -234,6 +251,12 @@ form button::before {
 .cocktail-resume p{
     font-size: 0.8em;
     margin: 5px 0 0 0;
+}
+
+.error-message {
+    font-size: 2em;
+    text-align: center;
+    margin: auto auto;
 }
 
 /* SECTION COCKTAILLIST - BARMAN DIV */
@@ -642,6 +665,10 @@ footer span {
     }
 
     .cocktail-title {
+        font-size: 1em;
+    }
+
+    .error-message {
         font-size: 1em;
     }
 

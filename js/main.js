@@ -79,6 +79,10 @@ function searchFormSubmitted(evt){
 	var research = document.querySelector('.search-bar').value;
 
 	evt.preventDefault();
+
+	if(document.querySelector('section.displayed') !== null){
+		document.querySelector('section.displayed').classList.remove('displayed');
+	}
 	
 	if(researchType === "name"){
 		searchCocktailsByName(research).then(cocktailsByName => {
@@ -239,10 +243,10 @@ async function getCocktailById(id){
 	const cocktail = await reponse.json();
 
 	try{
-		console.log('Cocktail clicked:', cocktail);
+		//console.log('Cocktail clicked:', cocktail);
 		return cocktail.drinks[0];
 	}catch(e){
-		console.log('Some error happened', e);
+		//console.log('Some error happened', e);
 		return null;
 	}
 }
@@ -252,10 +256,10 @@ async function getCocktailsByLetter(letter){
 	const cocktailList = await reponse.json();
 
 	try{
-		console.log('Cocktail listed by letter', cocktailList);
+		//console.log('Cocktail listed by letter', cocktailList);
 		return cocktailList;
 	}catch(e){
-		console.log('Some error happened', e);
+		//console.log('Some error happened', e);
 		return null;
 	}
 }
@@ -265,10 +269,10 @@ async function searchCocktailsByName(name){
 	const cocktailList = await reponse.json();
 
 	try{
-		console.log('Cocktail listed by name', cocktailList);
+		//console.log('Cocktail listed by name', cocktailList);
 		return cocktailList;
 	}catch(e){
-		console.log('Some error happened', e);
+		//console.log('Some error happened', e);
 		return null;
 	}
 }
@@ -278,10 +282,10 @@ async function searchCocktailsByIngredient(ingredient){
 	const cocktailList = await reponse.json();
 
 	try{
-		console.log('Cocktail listed by ingredient', cocktailList);
+		//console.log('Cocktail listed by ingredient', cocktailList);
 		return cocktailList;
 	}catch(e){
-		console.log('Some error happened', e);
+		//console.log('Some error happened', e);
 		return null;
 	}
 }
@@ -291,9 +295,10 @@ async function getRandomCocktail(){
 	const randomCocktail = await reponse.json();
 
     try{
-		console.log('Cocktail random:', randomCocktail);
+		//console.log('Cocktail random:', randomCocktail);
 		return randomCocktail.drinks[0];
 	}catch(e){
-		console.log('Some error happened', e);
+		//console.log('Some error happened', e);
+		return null;
 	}
 }
